@@ -39,3 +39,15 @@ a:hover {
 	color: var(--link-hover-color);
 	text-decoration: underline;
 }
+
+nav#navbar li {
+	list-style: none;
+	padding: 0;
+}
+
+nav#navbar ul {
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
