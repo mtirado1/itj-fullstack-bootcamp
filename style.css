@@ -14,7 +14,7 @@ body {
 	background-color: var(--page-color);
 	text-color: var(--text-color);
 	margin: auto;
-	width: min(95%, 50ch);
+	width: min(90%, 50ch);
 }
 
 p {
@@ -50,4 +50,22 @@ nav#navbar ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+#featured {
+	margin-bottom: 6em;
+}
+
+article.post img, #featured img {
+	width: 30%;
+	padding-right: 2em;
+	float: left;
+}
+
+.post-details-content img {
+	width: 100%;
+}
+
+#header {
+	margin-bottom: 4em;
 }
