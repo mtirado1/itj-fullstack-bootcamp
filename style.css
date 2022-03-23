@@ -1,0 +1,13 @@
+
+html {
+	font-family: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+}
+
+body {
+	margin: auto;
+	width: min(95%, 50ch);
+}
+
+p {
+	line-height: 2;
+}
