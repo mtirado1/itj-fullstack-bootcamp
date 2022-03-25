@@ -1,5 +1,3 @@
-import './App.css';
-
 const blogTitle = "A Blog";
 
 function Header(title) {
@@ -19,7 +17,7 @@ function Header(title) {
 function samplePost() {
 	return {
 		title: "Sample post",
-		img: "poppy.jpg",
+		img: "/poppy.jpg",
 		date: "Mar 24, 2022",
 		content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. Amet nisl purus in mollis nunc sed id semper risus. Eget sit amet tellus cras adipiscing enim eu turpis."
 	};
