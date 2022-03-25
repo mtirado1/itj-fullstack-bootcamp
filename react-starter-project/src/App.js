@@ -1,18 +1,6 @@
-const blogTitle = "A Blog";
-
-function Header(title) {
-	return (
-		<div id="header">
-			<h1>{title}</h1>
-			<nav id="navbar">
-				<ul>
-					<li><a href="new">Create new post</a></li>
-					<li><a href="list">View list of posts</a></li>
-				</ul>
-			</nav>
-		</div>
-	);
-}
+import Header from './components/Header'
+import PostList from './components/PostList'
+import FeaturedPost from './components/FeaturedPost'
 
 function samplePost() {
 	return {
@@ -23,42 +11,12 @@ function samplePost() {
 	};
 }
 
-function FeaturedPost(post) {
-	return (
-		<div id="featured">
-			<img src={post.img}></img>
-			<h2>{post.title}</h2>
-			<p className="date">{post.date}</p>
-			<p>{post.content}</p>
-		</div>
-	);
-}
-
-function NormalPost(post) {
-	return (
-		<article className="post">
-			<img src={post.img}></img>
-			<h2>{post.title}</h2>
-			<p className="date">{post.date}</p>
-			<p>{post.content}</p>
-		</article>
-	);
-}
-
-function PostList(posts) {
-	return (
-		<div className="posts">
-			{posts.map(post => NormalPost(post))}
-		</div>
-	);
-}
-
 function App() {
   return (
     <div className="App">
-		{Header(blogTitle)}
-		{FeaturedPost(samplePost())}
-		{PostList([samplePost(), samplePost()])}
+		<Header title="My Blog"/>
+		<FeaturedPost post={samplePost()}/>
+		<PostList posts={[samplePost(), samplePost(), samplePost()]}/>
     </div>
   );
 }
