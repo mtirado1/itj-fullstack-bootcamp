@@ -11,12 +11,20 @@ function samplePost() {
 	};
 }
 
+function makePosts(count) {
+	const posts = [];
+	for(var i = 0; i < count; i++) {
+		posts.push(samplePost());
+	}
+	return posts;
+}
+
 function App() {
   return (
     <div className="App">
 		<Header title="My Blog"/>
 		<FeaturedPost post={samplePost()}/>
-		<PostList posts={[samplePost(), samplePost(), samplePost()]}/>
+		<PostList posts={makePosts(5)}/>
     </div>
   );
 }
