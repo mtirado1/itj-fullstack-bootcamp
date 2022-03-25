@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
 
+const blogTitle = "A Blog";
+
+function Header(title) {
+	return (
+		<div id="header">
+			<h1>{title}</h1>
+			<nav id="navbar">
+				<ul>
+					<li><a href="new">Create new post</a></li>
+					<li><a href="list">View list of posts</a></li>
+				</ul>
+			</nav>
+		</div>
+	);
+}
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+		{Header(blogTitle)}
     </div>
   );
 }
