@@ -34,11 +34,31 @@ function FeaturedPost(post) {
 	);
 }
 
+function NormalPost(post) {
+	return (
+		<article className="post">
+			<img src={post.img}></img>
+			<h2>{post.title}</h2>
+			<p className="date">{post.date}</p>
+			<p>{post.content}</p>
+		</article>
+	);
+}
+
+function PostList(posts) {
+	return (
+		<div className="posts">
+			{posts.map(post => NormalPost(post))}
+		</div>
+	);
+}
+
 function App() {
   return (
     <div className="App">
 		{Header(blogTitle)}
 		{FeaturedPost(samplePost())}
+		{PostList([samplePost(), samplePost()])}
     </div>
   );
 }
