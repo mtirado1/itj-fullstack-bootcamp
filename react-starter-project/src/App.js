@@ -28,16 +28,16 @@ function App() {
 	<div className="App">
 	{
 		isCreating ? (
+			<CreatePost
+				onCreate={(newPost) => addPost(newPost)}
+				onCancel={() => setCreation(false)}
+			/>
+		) : (
 			<>
 			<Header title="My Blog" onCreate={() => setCreation(true)}/>
 			<FeaturedPost post={samplePost("Featured Post")}/>
 			<PostList posts={posts}/>
 			</>
-		) : (
-			<CreatePost
-				onCreate={(newPost) => addPost(newPost)}
-				onCancel={() => setCreation(false)}
-			/>
 		)
 	}
     </div>

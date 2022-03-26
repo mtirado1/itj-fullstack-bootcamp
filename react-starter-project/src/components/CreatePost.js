@@ -45,7 +45,7 @@ function CreatePost({onCreate, onCancel}) {
 				name="Author"
 				value={post.author}>
 			</input>
-			<p>
+			<p class="flex-row">
 				<button type="button" disabled={isDisabled()} onClick={() => {onCreate(post)}}>Create</button>
 				<button type="button" onClick={onCancel}>Cancel</button>
 			</p>
