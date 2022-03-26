@@ -5,6 +5,7 @@ import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
 import FeaturedPost from './components/FeaturedPost'
 
+
 function samplePost(title = "Sample Post") {
 	return {
 		title: title,
@@ -14,24 +15,31 @@ function samplePost(title = "Sample Post") {
 	};
 }
 
-function makePosts(count) {
-	const posts = [];
-	for(var i = 0; i < count; i++) {
-		posts.push(samplePost(`Sample post ${i + 1}`));
-	}
-	return posts;
-}
-
 function App() {
+	const [posts, setPosts] = useState([samplePost()]);
 	const [isCreating, setCreation] = useState(false);
+
+	function addPost(newPost) {
+		setPosts([newPost, ...posts]);
+		setCreation(false);
+	}
+
 	return (
 	<div className="App">
-		<Header title="My Blog" onCreate={() => setCreation(true)}/>
-		{
-			isCreating ? <CreatePost onCreate={() => setCreation(false)}/> :
+	{
+		isCreating ? (
+			<>
+			<Header title="My Blog" onCreate={() => setCreation(true)}/>
 			<FeaturedPost post={samplePost("Featured Post")}/>
-		}
-		<PostList posts={makePosts(5)}/>
+			<PostList posts={posts}/>
+			</>
+		) : (
+			<CreatePost
+				onCreate={(newPost) => addPost(newPost)}
+				onCancel={() => setCreation(false)}
+			/>
+		)
+	}
     </div>
   );
 }

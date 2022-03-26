@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function CreatePost({onCreate}) {
+function CreatePost({onCreate, onCancel}) {
 	const initialPost = {
 		title: "",
 		content: "",
@@ -10,32 +10,45 @@ function CreatePost({onCreate}) {
 
 	const [post, setPost] = useState(initialPost);
 
+	function isDisabled() {
+		return post.title === "" || post.content === "";
+	}
+
+	function updatePost(key, value) {
+		const newPost = {...post};
+		newPost[key] = value;
+		setPost(newPost);
+	}
+
 	return (
 		<form>
 			<h1>Create Post</h1>
 			<h2>Title</h2>
-				<input
-					onChange={(event) => setPost({title: event.target.value})}
-					type="text"
-					name="title"
-					placeholder="Add a title..."
-					value={post.title}>
-				</input>
+			<input
+				onChange={(event) => updatePost("title", event.target.value)}
+				type="text"
+				name="Title"
+				placeholder="Add a title..."
+				value={post.title}>
+			</input>
 			<h2>Content</h2>
-				<input
-					onChange={(event) => setPost({content: event.target.value})}
-					type="textarea"
-					name="content"
-					value={post.content}>
-				</input>
+			<textarea
+				onChange={(event) => updatePost("content", event.target.value)}
+				type="textarea"
+				name="Content"
+				value={post.content}>
+			</textarea>
 			<h3>Author</h3>
-				<input
-					onChange={(event) => setPost({author: event.target.value})}
-					type="text"
-					name="author"
-					value={post.author}>
-				</input>
-			<p><button onClick={onCreate}>Create</button></p>
+			<input
+				onChange={(event) => updatePost("author", event.target.value)}
+				type="text"
+				name="Author"
+				value={post.author}>
+			</input>
+			<p>
+				<button type="button" disabled={isDisabled()} onClick={() => {onCreate(post)}}>Create</button>
+				<button type="button" onClick={onCancel}>Cancel</button>
+			</p>
 		</form>
 	);
 }
