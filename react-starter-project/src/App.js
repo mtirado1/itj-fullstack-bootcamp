@@ -1,4 +1,7 @@
+import React, { useState, useEffect } from 'react';
+
 import Header from './components/Header'
+import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
 import FeaturedPost from './components/FeaturedPost'
 
@@ -20,10 +23,14 @@ function makePosts(count) {
 }
 
 function App() {
-  return (
-    <div className="App">
-		<Header title="My Blog"/>
-		<FeaturedPost post={samplePost("Featured Post")}/>
+	const [isCreating, setCreation] = useState(false);
+	return (
+	<div className="App">
+		<Header title="My Blog" onCreate={() => setCreation(true)}/>
+		{
+			isCreating ? <CreatePost onCreate={() => setCreation(false)}/> :
+			<FeaturedPost post={samplePost("Featured Post")}/>
+		}
 		<PostList posts={makePosts(5)}/>
     </div>
   );
