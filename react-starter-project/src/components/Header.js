@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 function Header({title, onCreate}) {
 	return (
@@ -6,7 +6,7 @@ function Header({title, onCreate}) {
 			<h1>{title}</h1>
 			<nav id="navbar">
 				<ul>
-					<li><button onClick={onCreate}>Create new post</button></li>
+					<li><Link to="/create-post">Create Post</Link></li>
 					<li><a href="list">View list of posts</a></li>
 				</ul>
 			</nav>

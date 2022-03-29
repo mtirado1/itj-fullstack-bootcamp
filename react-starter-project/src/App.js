@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header'
 import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
@@ -15,32 +15,31 @@ function samplePost(title = "Sample Post") {
 	};
 }
 
+
 function App() {
 	const [posts, setPosts] = useState([samplePost()]);
-	const [isCreating, setCreation] = useState(false);
+	const navigate = useNavigate();
 
 	function addPost(newPost) {
 		setPosts([newPost, ...posts]);
-		setCreation(false);
+		navigate("/", {replace: true});
 	}
 
 	return (
 	<div className="App">
-	{
-		isCreating ? (
-			<CreatePost
-				onCreate={(newPost) => addPost(newPost)}
-				onCancel={() => setCreation(false)}
-			/>
-		) : (
+	<Routes>
+		<Route path="/" element={
 			<>
-			<Header title="My Blog" onCreate={() => setCreation(true)}/>
+			<Header title="My Blog"/>
 			<FeaturedPost post={samplePost("Featured Post")}/>
 			<PostList posts={posts}/>
 			</>
-		)
-	}
-    </div>
+		} />
+		<Route path="create-post" element={
+			<CreatePost onCreate={addPost} />
+		} />
+	</Routes>
+	</div>
   );
 }
 

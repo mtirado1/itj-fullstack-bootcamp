@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function CreatePost({onCreate, onCancel}) {
+	const navigate = useNavigate();
 	const initialPost = {
 		title: "",
 		content: "",
@@ -47,7 +49,7 @@ function CreatePost({onCreate, onCancel}) {
 			</input>
 			<p class="flex-row">
 				<button type="button" disabled={isDisabled()} onClick={() => {onCreate(post)}}>Create</button>
-				<button type="button" onClick={onCancel}>Cancel</button>
+				<button type="button" onClick={() => navigate("/")}>Cancel</button>
 			</p>
 		</form>
 	);
