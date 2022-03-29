@@ -3,8 +3,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header'
 import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
+import PostIndex from './components/PostIndex'
 import FeaturedPost from './components/FeaturedPost'
-
 
 function samplePost(title = "Sample Post") {
 	return {
@@ -17,6 +17,7 @@ function samplePost(title = "Sample Post") {
 
 
 function App() {
+	const blogTitle = "My Blog"
 	const [posts, setPosts] = useState([samplePost()]);
 	const navigate = useNavigate();
 
@@ -27,16 +28,25 @@ function App() {
 
 	return (
 	<div className="App">
+	<Header title={blogTitle}/>
 	<Routes>
 		<Route path="/" element={
 			<>
-			<Header title="My Blog"/>
 			<FeaturedPost post={samplePost("Featured Post")}/>
 			<PostList posts={posts}/>
 			</>
 		} />
 		<Route path="create-post" element={
 			<CreatePost onCreate={addPost} />
+		} />
+		<Route path="posts" element={
+			<>
+			<h2>List of Posts</h2>
+			<PostIndex posts={posts}/>
+			</>
+		} />
+		<Route path="*" element={
+			<h2>Page not Found</h2>
 		} />
 	</Routes>
 	</div>

@@ -13,7 +13,9 @@ function CreatePost({onCreate, onCancel}) {
 	const [post, setPost] = useState(initialPost);
 
 	function isDisabled() {
-		return post.title === "" || post.content === "";
+		return post.title === ""
+			|| post.content === ""
+			|| post.date === "";
 	}
 
 	function updatePost(key, value) {
@@ -40,6 +42,12 @@ function CreatePost({onCreate, onCancel}) {
 				name="Content"
 				value={post.content}>
 			</textarea>
+			<h3>Date</h3>
+			<input
+				onChange={(event) => updatePost("date", event.target.value)}
+				type="date"
+				name="Date">
+			</input>
 			<h3>Author</h3>
 			<input
 				onChange={(event) => updatePost("author", event.target.value)}
