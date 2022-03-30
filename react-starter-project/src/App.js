@@ -5,6 +5,7 @@ import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
 import PostIndex from './components/PostIndex'
 import FeaturedPost from './components/FeaturedPost'
+import MainPost from './components/MainPost'
 
 function samplePost(title = "Sample Post") {
 	return {
@@ -39,12 +40,15 @@ function App() {
 		<Route path="create-post" element={
 			<CreatePost onCreate={addPost} />
 		} />
+		<Route path="posts/:postId" element={
+			<MainPost getPost={(id) => posts[id]}/>
+		} />
 		<Route path="posts" element={
 			<>
 			<h2>List of Posts</h2>
 			<PostIndex posts={posts}/>
 			</>
-		} />
+		}/>
 		<Route path="*" element={
 			<h2>Page not Found</h2>
 		} />

@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 
 function PostIndex({posts}) {
 	return (
 		<div><ul>
-			{posts.map(post =>
-				<li><b>{post.date}:</b> {post.title}</li>
+			{posts.map((post, index) =>
+				<li>
+					<b>{post.date}:</b> <Link to={`/posts/${index}`}>{post.title}</Link>
+				</li>
 			)}
 		</ul></div>
 	);
