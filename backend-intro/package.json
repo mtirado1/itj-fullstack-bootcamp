@@ -1,0 +1,17 @@
+{
+  "name": "backend-intro",
+  "version": "1.0.0",
+  "description": "Intro to javascript backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "M. Tirado",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
