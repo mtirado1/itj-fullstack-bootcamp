@@ -1,22 +1,5 @@
+const {CommentSchema} = require('./comment');
 const mongoose = require("mongoose");
-
-const CommentSchema = new mongoose.Schema(
-	{
-		title: {
-			type: String,
-			required: true
-		},
-		author: {
-			type: String
-		},
-		body: {
-			type: String,
-			required: true
-		}
-	},
-	{ timestamps: true }
-);
-
 
 const PostSchema = new mongoose.Schema(
 	{
@@ -40,6 +23,4 @@ const PostSchema = new mongoose.Schema(
 );
 
 const PostModel = mongoose.model("Post", PostSchema);
-const CommentModel = mongoose.model("Comment", CommentSchema);
-
-module.exports = {Post: PostModel, Comment: CommentModel};
+module.exports = {Post: PostModel};

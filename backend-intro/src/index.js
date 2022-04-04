@@ -4,8 +4,8 @@ const cors = require("cors");
 const app = express();
 require('dotenv').config();
 
-const postsService = require('./service/posts');
-const commentsService = require('./service/comments');
+const postsService = require('./service/post');
+const commentsService = require('./service/comment');
 const PORT = 2400;
 
 function connectDatabase() {

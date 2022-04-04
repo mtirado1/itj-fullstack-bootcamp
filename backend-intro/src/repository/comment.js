@@ -1,4 +1,5 @@
-const {Post, Comment} = require('../models/post');
+const {Post} = require('../models/post');
+const {Comment} = require('../models/comment');
 
 const commentsRepository = {
 	getComments: async (postId) => {
