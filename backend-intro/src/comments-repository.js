@@ -8,10 +8,16 @@ const commentsRepository = {
 
 	createComment: async(postId, comment) => {
 		const post = await Post.findById(postId);
-		const newComment = new Comment(comment)
+		const newComment = new Comment(comment);
 		post.comments.push(newComment);
 		post.save();
 		return newComment;
+	},
+
+	deleteComment: async (postId, commentId) => {
+		const post = await Post.findById(postId);
+		await post.comments.findByIdAndDelete(commentId).exec();
+		post.save();
 	}
 }
 

@@ -22,13 +22,13 @@ function connectDatabase() {
 
 app.get('/posts', postsService.getPosts);
 app.get('/posts/:postId', postsService.getPostById);
-
-app.get('/posts/:postId/comments', commentsService.getComments);
-app.post('/posts/:postId/comments', commentsService.createComment);
-
 app.post('/posts', postsService.createPost);
 app.delete('/posts/:postId', postsService.deletePost);
 app.put('/posts/:postId', postsService.updatePost);
+
+app.get('/posts/:postId/comments', commentsService.getComments);
+app.post('/posts/:postId/comments', commentsService.createComment);
+app.delete('/posts/:postId/comments/:commentId', commentsService.deleteComment);
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}...`);

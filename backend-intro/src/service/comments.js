@@ -22,6 +22,17 @@ const commentsService = {
 			console.log(error);
 			response.status(500).json({message: "Internal Error"});
 		}
+	},
+
+	deleteComment: async (request, response) => {
+		const {postId, commentId} = request.params;
+		try {
+			await commentsRepository.deletePost(postId, commentId);
+			response.status(204).send();
+		} catch (error) {
+			console.log(error);
+			response.status(500).json({message: "Internal Error"});
+		}
 	}
 }
 

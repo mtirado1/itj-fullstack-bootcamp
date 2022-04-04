@@ -1,4 +1,3 @@
-
 const {Post} = require('./models/post');
 
 const postsRepository = {
