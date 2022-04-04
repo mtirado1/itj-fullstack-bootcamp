@@ -7,8 +7,7 @@ const CommentSchema = new mongoose.Schema(
 			required: true
 		},
 		author: {
-			type: String,
-			required: true
+			type: String
 		},
 		body: {
 			type: String,
@@ -41,5 +40,6 @@ const PostSchema = new mongoose.Schema(
 );
 
 const PostModel = mongoose.model("Post", PostSchema);
+const CommentModel = mongoose.model("Comment", CommentSchema);
 
-module.exports = PostModel;
+module.exports = {Post: PostModel, Comment: CommentModel};

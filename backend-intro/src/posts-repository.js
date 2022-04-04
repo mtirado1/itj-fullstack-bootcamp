@@ -1,5 +1,5 @@
 
-const Post = require('./models/post');
+const {Post} = require('./models/post');
 
 const postsRepository = {
 	getPosts: async () => {
