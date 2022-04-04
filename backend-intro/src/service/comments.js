@@ -1,4 +1,4 @@
-const commentsRepository = require('../comments-repository');
+const commentsRepository = require('../repository/comment');
 
 const commentsService = {
 	getComments: async (request, response) => {

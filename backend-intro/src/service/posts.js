@@ -1,4 +1,4 @@
-const postsRepository = require('../posts-repository');
+const postsRepository = require('../repository/post');
 
 const postsService = {
 	getPosts: async (request, response) => {
