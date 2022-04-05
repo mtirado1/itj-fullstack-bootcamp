@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
+import postsApi from '../posts-api';
 
-function CreatePost({onCreate, onCancel}) {
+const emptyPost = {
+	title: "",
+	author: "",
+	body: ""
+}
+
+function CreatePost({onSave}) {
 	const navigate = useNavigate();
-	const initialPost = {
-		title: "",
-		content: "",
-		author: "",
-		date: ""
-	};
-
-	const [post, setPost] = useState(initialPost);
+	const {postId} = useParams();
+	const [post, setPost] = useState(emptyPost);
 
 	function isDisabled() {
 		return post.title === ""
-			|| post.content === ""
-			|| post.date === "";
+			|| post.body === "";
 	}
 
 	function updatePost(key, value) {
@@ -23,6 +23,16 @@ function CreatePost({onCreate, onCancel}) {
 		newPost[key] = value;
 		setPost(newPost);
 	}
+
+	useEffect(() => {
+		if (postId) {
+			async function fetchData() {
+				const newPost = await postsApi.getPost(postId);
+				if (newPost) { setPost(newPost) }
+			}
+			fetchData();
+		} else { setPost(emptyPost) }
+	}, [postId]);
 
 	return (
 		<form>
@@ -37,17 +47,11 @@ function CreatePost({onCreate, onCancel}) {
 			</input>
 			<h2>Content</h2>
 			<textarea
-				onChange={(event) => updatePost("content", event.target.value)}
+				onChange={(event) => updatePost("body", event.target.value)}
 				type="textarea"
 				name="Content"
-				value={post.content}>
+				value={post.body}>
 			</textarea>
-			<h3>Date</h3>
-			<input
-				onChange={(event) => updatePost("date", event.target.value)}
-				type="date"
-				name="Date">
-			</input>
 			<h3>Author</h3>
 			<input
 				onChange={(event) => updatePost("author", event.target.value)}
@@ -55,8 +59,8 @@ function CreatePost({onCreate, onCancel}) {
 				name="Author"
 				value={post.author}>
 			</input>
-			<p class="flex-row">
-				<button type="button" disabled={isDisabled()} onClick={() => {onCreate(post)}}>Create</button>
+			<p className="flex-row">
+				<button type="button" disabled={isDisabled()} onClick={() => {onSave(post, postId)}}>{postId ? "Update" : "Create"}</button>
 				<button type="button" onClick={() => navigate("/")}>Cancel</button>
 			</p>
 		</form>

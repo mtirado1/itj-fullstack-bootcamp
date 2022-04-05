@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+// React + Router
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+
+// Components
 import Header from './components/Header'
 import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
@@ -7,23 +10,39 @@ import PostIndex from './components/PostIndex'
 import FeaturedPost from './components/FeaturedPost'
 import MainPost from './components/MainPost'
 
-function samplePost(title = "Sample Post") {
-	return {
-		title: title,
-		image: "/poppy.jpg",
-		date: "Mar 24, 2022",
-		content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. Amet nisl purus in mollis nunc sed id semper risus. Eget sit amet tellus cras adipiscing enim eu turpis."
-	};
-}
-
+// API
+import postsApi from './posts-api'
 
 function App() {
 	const blogTitle = "My Blog"
-	const [posts, setPosts] = useState([samplePost()]);
+	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
 
-	function addPost(newPost) {
-		setPosts([newPost, ...posts]);
+	useEffect(() => {
+		getPosts();
+	}, []);
+
+	async function getPosts() {
+		const posts = await postsApi.getPosts();
+		setPosts(posts, []);
+	}
+
+	async function deletePost(postId) {
+		const deletedPost = await postsApi.deletePost(postId);
+		if (deletedPost) {
+			setPosts(posts.filter(post => post._id !== postId));
+		}
+	}
+
+	async function savePost(post, postId) {
+		if (postId) {
+			const updatedPost = await postsApi.updatePost(postId, post);
+			const otherPosts = posts.filter(post => post._id !== postId);
+			setPosts([updatedPost, ...otherPosts]);
+		} else {
+			const createdPost = await postsApi.createPost(post);
+			setPosts([createdPost, ...posts]);
+		}
 		navigate("/", {replace: true});
 	}
 
@@ -33,15 +52,17 @@ function App() {
 	<Routes>
 		<Route path="/" element={
 			<>
-			<FeaturedPost post={samplePost("Featured Post")}/>
-			<PostList posts={posts}/>
+			<PostList posts={posts} onDelete={deletePost}/>
 			</>
 		} />
 		<Route path="create-post" element={
-			<CreatePost onCreate={addPost} />
+			<CreatePost onSave={savePost} />
+		} />
+		<Route path="edit-post/:postId" element={
+			<CreatePost onSave={savePost} />
 		} />
 		<Route path="posts/:postId" element={
-			<MainPost getPost={(id) => posts[id]}/>
+			<MainPost getPost={postsApi.getPost}/>
 		} />
 		<Route path="posts" element={
 			<>

@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
+import formatDate from '../utils';
 
 function PostIndex({posts}) {
 	return (
-		<p><ul>
-			{posts.map((post, index) =>
+		<ul className="post-list">
+			{posts.map(post =>
 				<li>
-					<b>{post.date}:</b> <Link to={`/posts/${index}`}>{post.title}</Link>
+					<span>{formatDate(post.createdAt)}:</span> <Link to={`/posts/${post._id}`}>{post.title}</Link>
 				</li>
 			)}
-		</ul></p>
+		</ul>
 	);
 }
 
