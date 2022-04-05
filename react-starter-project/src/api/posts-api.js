@@ -1,3 +1,4 @@
+import JSONRequest from './json-request';
 
 const URL = "http://localhost:2400"
 
@@ -9,21 +10,7 @@ const postsApi = {
 	updatePost
 };
 
-async function jsonRequest(path, method = "GET", body = null) {
-	const params = {
-		method: method,
-		headers: { "Content-Type": "application/json" }
-	};
-	if (body !== null) {
-		params.body = JSON.stringify(body);
-	}
-	return await fetch(URL + path, params);
-}
-
-jsonRequest.get = async (path, body = null) => jsonRequest(path, "GET", body);
-jsonRequest.post = async (path, body = null) => jsonRequest(path, "POST", body);
-jsonRequest.put = async (path, body = null) => jsonRequest(path, "PUT", body);
-jsonRequest.delete = async (path, body = null) => jsonRequest(path, "DELETE", body);
+const jsonRequest = new JSONRequest(URL);
 
 async function getPosts() {
 	try {

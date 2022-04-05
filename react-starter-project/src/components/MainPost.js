@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import postsApi from '../posts-api';
+import postsApi from '../api/posts-api';
 import { useState, useEffect, useCallback } from 'react'
 import formatDate from '../utils';
 

@@ -1,4 +1,3 @@
-
 import Post from './Post'
 
 function PostList({posts, onDelete}) {

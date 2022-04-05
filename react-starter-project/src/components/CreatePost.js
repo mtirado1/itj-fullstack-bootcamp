@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import postsApi from '../posts-api';
+import postsApi from '../api/posts-api';
 
 const emptyPost = {
 	title: "",

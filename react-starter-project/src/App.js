@@ -7,11 +7,10 @@ import Header from './components/Header'
 import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
 import PostIndex from './components/PostIndex'
-import FeaturedPost from './components/FeaturedPost'
 import MainPost from './components/MainPost'
 
 // API
-import postsApi from './posts-api'
+import postsApi from './api/posts-api'
 
 function App() {
 	const blogTitle = "My Blog"
@@ -24,7 +23,7 @@ function App() {
 
 	async function getPosts() {
 		const posts = await postsApi.getPosts();
-		setPosts(posts, []);
+		setPosts(posts ?? []);
 	}
 
 	async function deletePost(postId) {
