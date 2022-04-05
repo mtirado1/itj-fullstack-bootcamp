@@ -19,7 +19,7 @@ const postsRepository = {
 
 	updatePost: async(id, post) => {
 		const updatedPost = await Post.findByIdAndUpdate(id, post, {
-    		returnDocument: "after",
+    		returnDocument: "after"
 		}).lean().exec();
 		return updatedPost;
 	},

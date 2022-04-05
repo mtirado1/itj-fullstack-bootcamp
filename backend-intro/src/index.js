@@ -18,11 +18,12 @@ function connectDatabase() {
 }
 
 const commentsRouter = express.Router();
-commentsRouter.route('/')
+commentsRouter.route('/:postId/comments/')
 	.get(commentsService.getComments)
 	.post(commentsService.createComment);
-commentsRouter.route('/:commentId')
-	.delete(commentsService.deleteComment);
+commentsRouter.route('/:postId/comments/:commentId')
+	.delete(commentsService.deleteComment)
+	.put(commentsService.updateComment);
 
 const postsRouter = express.Router();
 postsRouter.route('/')
@@ -32,11 +33,11 @@ postsRouter.route('/:postId')
 	.get(postsService.getPostById)
 	.delete(postsService.deletePost)
 	.put(postsService.updatePost);
-postsRouter.use('/:postId/comments', commentsRouter);
 
 app.use(express.json());
 app.use(cors());
 app.use('/posts', postsRouter);
+app.use('/posts', commentsRouter);
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}...`);
