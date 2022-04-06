@@ -50,9 +50,7 @@ function App() {
 	<Header title={blogTitle}/>
 	<Routes>
 		<Route path="/" element={
-			<>
 			<PostList posts={posts} onDelete={deletePost}/>
-			</>
 		} />
 		<Route path="create-post" element={
 			<CreatePost onSave={savePost} />
@@ -64,10 +62,7 @@ function App() {
 			<MainPost getPost={postsApi.getPost}/>
 		} />
 		<Route path="posts" element={
-			<>
-			<h2>List of Posts</h2>
 			<PostIndex posts={posts}/>
-			</>
 		}/>
 		<Route path="*" element={
 			<h2>Page not Found</h2>

@@ -10,6 +10,7 @@ html {
 	--h2-color: #CA6702;
 	--link-color: #0A9396;
 	--link-hover-color: #005F73;
+	--delete-color: #9B2226;
 }
 body {
 	background-color: var(--page-color);
@@ -62,6 +63,12 @@ article.post img, #featured img {
 	padding-right: 2em;
 	float: left;
 }
+
+article.post button {
+	font-size: small;
+}
+
+
 
 .post-details-content img {
 	width: 100%;
@@ -123,4 +130,24 @@ form .flex-row {
 	flex-direction: row;
 	justify-content: space-evenly;
 
+}
+
+article.post button.delete {
+	color: var(--delete-color);
+}
+
+article.post button.delete:hover, article.post button.delete:active{
+	cursor: pointer;
+	background-color: var(--delete-color);
+	color: var(--page-color);
+}
+
+article.post div.buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+}
+
+div.buttons button {
+	margin: 0 0.5rem;
 }
